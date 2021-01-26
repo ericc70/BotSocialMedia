@@ -37,14 +37,14 @@ class TwitterApiService
         dd($this->auth()->post("statuses/update", ["status" => $content]));
     }
 
-    public function getAlllTweet(){
+    public function getAlllTweet() :array{
 
      
-        dd($this->auth()->get("statuses/home_timeline"));
+        return $this->auth()->get("statuses/home_timeline");
     }
 
     public function getTweet(int $id){
-        
+       dd(  $this->auth()->get("statuses/show", ['id' =>$id]));
     }
 
 }

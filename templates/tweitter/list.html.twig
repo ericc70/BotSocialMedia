@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TweitterController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="wrapper">
+
+<table>
+<tr>
+<td>creat at</td>
+<td>message</td>
+<td>nb like</td>
+<td>nb retweet</td>
+<td> action</td>
+</tr>
+  {% for tweet in tweets %}
+  <tr>
+<td>{{ tweet.created_at   }}</td>
+<td> {{ tweet.text}} </td>
+<td> {{ tweet.favorite_count}} </td>
+<td> {{ tweet.retweet_count}} </td>
+<td> detail - edit - <a href=" {{ path('twitterone',{idTweet:tweet.id} ) }} ">voir</a> </td>
+
+</tr>
+  {% endfor %}
+</table>
+    <pre>
+      {{ dump(tweets) }}
+    </pre>
+</div>
+{% endblock %}

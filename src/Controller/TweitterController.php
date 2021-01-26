@@ -37,10 +37,23 @@ class TweitterController extends AbstractController
     public function getall(TwitterApiService $tweet): Response
 
     {
-         $tweet->getAlllTweet();
+        // dd($tweet->getAlllTweet());
 
-        return $this->render('tweitter/index.html.twig', [
-            'controller_name' => 'TweitterController',
+        return $this->render('tweitter/list.html.twig', [
+           "tweets" =>$tweet->getAlllTweet()
+        ]);
+    }
+       /**
+     * @Route("/twitter-one/{idTweet}", name="twitterone")
+     */
+    public function getOne(TwitterApiService $tweet, int $idTweet): Response
+
+    {
+      
+        
+
+        return $this->render('tweitter/list.html.twig', [
+           "tweets" =>$tweet->getTweet($idTweet)
         ]);
     }
 }
