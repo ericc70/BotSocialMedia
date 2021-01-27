@@ -43,12 +43,14 @@ class TwitterApiService
     }
 
     public function getTweet(int $id) :object {
-        return $this->auth()->get("statuses/show", ['id' =>$id]);
+        return $this->auth()->get("statuses/show", ['id' =>$id, 'tweet_mode'=> 'extended'] );
     }
 
     public function getRetweets(int $id) :array {
-        return $this->auth()->get("statuses/retweets", ['id' =>$id]);
+        return $this->auth()->get("statuses/retweets", ['id' =>$id] );
     }
 
-
+    public function uploadImage(string $content) :array {
+        dd ($this->auth()->get("media/upload", ['media' =>$content]) );
+    }
 }

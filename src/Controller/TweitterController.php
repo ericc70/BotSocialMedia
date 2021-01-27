@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Form\MessageType;
 use App\Service\TwitterApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,13 +31,20 @@ class TweitterController extends AbstractController
     /**
      * @Route("/twitter-post", name="tweitterPost")
      */
-    public function post(): Response
+    public function post(Request $request): Response
 
     {
-         $this->tweet->post("test message via my application");
+         
+        $form = $this->createForm(MessageType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $content= $form->get('message')->getData();
+           $this->tweet->post($content);
+        }
 
-        return $this->render('tweitter/index.html.twig', [
+        return $this->render('tweitter/post.html.twig', [
             'controller_name' => 'TweitterController',
+            'form' => $form->createView(),
         ]);
     }
 

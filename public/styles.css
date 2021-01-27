@@ -33,3 +33,7 @@ input,textarea,select,option{
   .arrow {
     border-right-color: red !important;
   }
+
+  .bg-dark-gray{
+    background-color: #343a40 !important;
+  }
