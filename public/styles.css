@@ -1,0 +1,35 @@
+body{
+    color:aliceblue;
+    background-color: rgb(9, 11, 15) !important;
+}
+input,textarea,select,option{
+    background-color: #212529 !important;
+    color:aliceblue !important;
+    border:none !important;
+}
+
+/* Popover */
+.popover {
+    border: 2px dotted red !important;
+    background-color: chartreuse;
+  }
+  
+  /* Popover Header */
+  .popover-title {
+    background-color: #ad2121 important;
+    color: #FFFFFF;
+    font-size: 28px;
+    text-align:center;
+  }
+  
+  /* Popover Body */
+  .popover-content {
+    background-color: coral !important;
+    color: #FFFFFF;
+    padding: 25px;
+  }
+  
+  /* Popover Arrow */
+  .arrow {
+    border-right-color: red !important;
+  }
