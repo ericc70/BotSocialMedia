@@ -19,7 +19,7 @@ class TweitterController extends AbstractController
    }
    
     /**
-     * @Route("/tweitter", name="tweitter")
+     * @Route("/twitter", name="twitter")
      */
     public function index(): Response
     {
@@ -40,7 +40,7 @@ class TweitterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $content= $form->get('message')->getData();
            $this->tweet->post($content);
-        }
+           unset($form);        }
 
         return $this->render('tweitter/post.html.twig', [
             'controller_name' => 'TweitterController',
@@ -60,7 +60,7 @@ class TweitterController extends AbstractController
     }
 
      /**
-     * @Route("/twitter-one/{idTweet}", name="twitterone")
+     * @Route("/twitter-one/{idTweet}", name="twitterOne")
      */
     public function getOne( int $idTweet): Response
     {
@@ -70,7 +70,7 @@ class TweitterController extends AbstractController
     }
 
      /**
-     * @Route("/twitter-get-retweets/{idTweet}", name="re-twitterone")
+     * @Route("/twitter-get-retweets/{idTweet}", name="twitterGetRetweet")
      */
     public function getRetweets( int $idTweet): Response
     {
@@ -79,4 +79,38 @@ class TweitterController extends AbstractController
         ]);
     }
 
+        /**
+     * @Route("/twitter-mention", name="tweitteMntionr")
+     */
+    public function mention(): Response
+    {$this->tweet->getMention();
+        return $this->render('tweitter/index.html.twig', [
+            'controller_name' => 'TweitterController',
+        ]);
+    }
+
+    
+
+    /**
+     * @Route("/twitter-get-dm", name="twitterGetDm")
+     */
+    public function getDirectMessage(): Response
+    {$this->tweet->getDirectMessage();
+        return $this->render('tweitter/index.html.twig', [
+            'controller_name' => 'TweitterController',
+        ]);
+    }
+    /**
+     * @Route("/twitter-post-dm", name="twitterPostDm")
+     */
+    public function PostDirectMessage(): Response
+    {
+        $this->tweet->postDirectMessage("ceci est un test direct messagage depuis une apllicatioàn web", "716615506669789187");
+        return $this->render('tweitter/index.html.twig', [
+            'controller_name' => 'TweitterController',
+        ]);
+    }
+
+
+    
 }

@@ -49,8 +49,44 @@ class TwitterApiService
     public function getRetweets(int $id) :array {
         return $this->auth()->get("statuses/retweets", ['id' =>$id] );
     }
-
+/*
     public function uploadImage(string $content) :array {
         dd ($this->auth()->get("media/upload", ['media' =>$content]) );
     }
+*/
+    /* Mention*/
+    public function getMention() :array {
+        dd ($this->auth()->get("statuses/mentions_timeline" ,  ['tweet_mode'=> 'extended']));
+    }
+
+
+
+    /* direct message */
+    public function getDirectMessage():array {
+        dd ($this->auth()->get("direct_messages/events/list") );
+    }
+
+    public function postDirectMessage(string $content, int $id)
+    {
+
+        $params = [
+            'event' => [
+                'type' => "message_create",
+                'message_create' => [
+                    'target' => [
+                        'recipient_id' => $id
+                    ],
+                    'message_data' => [
+                        'text' => $content
+                    ]
+                ]
+            ]
+        ];
+        
+       dd(  $this->auth()->post("direct_messages/events/new", $params, true ) );
+   
+    }
+
+
+
 }
