@@ -4,24 +4,14 @@
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+
+
 
 	<div class="container-fluid mt-5">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<h2>All messages</h2>
+					<h2>{{ titleController}}</h2>
 				</div>
 				<div class="col-12">
 					<table class="table table-dark table-striped">
@@ -50,7 +40,7 @@
 									</td>
 									<td>
 										detail - edit -
-										<a href=" {{ path('twitterone',{idTweet:tweet.id} ) }} ">voir</a>
+										<a href=" {{ path('twitterOne',{idTweet:tweet.id} ) }} ">voir</a>
 									</td>
 
 								</tr>

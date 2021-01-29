@@ -29,7 +29,7 @@ class TweitterController extends AbstractController
     }
     
     /**
-     * @Route("/twitter-post", name="tweitterPost")
+     * @Route("/twitter-post", name="twitterPost")
      */
     public function post(Request $request): Response
 
@@ -49,13 +49,27 @@ class TweitterController extends AbstractController
     }
 
     /**
-    * @Route("/twitter-all", name="twitterAll")
+    * @Route("/twitter-mes-tweets", name="twitter-mes-tweets" )
     */
     public function getall(): Response
     {
         // dd($tweet->getAlllTweet());
         return $this->render('tweitter/list.html.twig', [
-           "tweets" =>$this->tweet->getAlllTweet()
+           "tweets" =>$this->tweet->getUserTweet(),
+           "titleController" =>"Mes tweets"
+        ]);
+    }
+
+
+        /**
+    * @Route("/twitter-timeline", name="twitter-timeline" )
+    */
+    public function getTimeline(): Response
+    {
+        // dd($tweet->getAlllTweet());
+        return $this->render('tweitter/list.html.twig', [
+           "tweets" =>$this->tweet->getUserTweet(),
+           "titleController" =>"Timeline"
         ]);
     }
 
@@ -80,13 +94,14 @@ class TweitterController extends AbstractController
     }
 
         /**
-     * @Route("/twitter-mention", name="tweitteMntionr")
+     * @Route("/twitter-mention", name="twitteMntions")
      */
     public function mention(): Response
-    {$this->tweet->getMention();
-        return $this->render('tweitter/index.html.twig', [
-            'controller_name' => 'TweitterController',
-        ]);
+    {
+        return $this->render('tweitter/list.html.twig', [
+            "tweets" =>$this->tweet->getMention(),
+            "titleController" =>"Mentions"
+         ]);
     }
 
     
@@ -96,6 +111,20 @@ class TweitterController extends AbstractController
      */
     public function getDirectMessage(): Response
     {$this->tweet->getDirectMessage();
+        return $this->render('tweitter/dm-list.html.twig', [
+            'controller_name' => 'TweitterController',
+        ]);
+    }
+    /**
+     * @Route("/twitter-post-dmw", name="twitterPostDmWelcome")
+     */
+    public function newDirectMessageW(): Response
+    {
+
+        $message="sdqsdqsdqs sdqsdqsdsd";
+        // $idUser="13539855021778493454";
+        $idUser="716615506669789187";
+        $this->tweet->newDirectMessageW("$message", "$idUser");
         return $this->render('tweitter/index.html.twig', [
             'controller_name' => 'TweitterController',
         ]);
@@ -105,10 +134,23 @@ class TweitterController extends AbstractController
      */
     public function PostDirectMessage(): Response
     {
-        $this->tweet->postDirectMessage("ceci est un test direct messagage depuis une apllicatioàn web", "716615506669789187");
+
+        $message="dur dur la vie de devleloopeur";
+        $idUser="716615506669789187";
+        $this->tweet->postDirectMessage("$message", "$idUser");
         return $this->render('tweitter/index.html.twig', [
             'controller_name' => 'TweitterController',
         ]);
+    }
+    /**
+     * @Route("/twitter-del-dm", name="twitterDelDm")
+     */
+    public function DelDirectMessage(int $id, string $route="twitterGetDm"): Response
+    {
+                
+        $this->tweet->deleteDirectMessage($id);
+        return $this->redirectToRoute($route);
+     
     }
 
 

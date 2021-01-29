@@ -37,3 +37,13 @@ input,textarea,select,option{
   .bg-dark-gray{
     background-color: #343a40 !important;
   }
+
+  .dropdown-item:hover {
+    color: rgb(216, 216, 216) !important;
+    background-color: #16293d !important;
+}
+
+.dropdown-item{
+  color: rgba(224, 201, 201, 0.55) !important;
+
+}

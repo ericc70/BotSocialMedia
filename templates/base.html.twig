@@ -29,15 +29,53 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
+
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tweet
+          </a>
+          <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item " href="{{ path('twitter-timeline') }}">Timelime</a></li>
+            <li><a class="dropdown-item" href="{{ path('twitter-mes-tweets') }}">Mes tweets</a></li>
+            <li><a class="dropdown-item" href="{{path('twitteMntions') }}">Mentions</a></li>
+            <li><a class="dropdown-item" href="{{path('twitterPost') }}">nouveau tweet</a></li>
+  
+          </ul>
+        </li>
+           <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Direct message
+          </a>
+          <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item " href="#">liste</a></li>
+            <li><a class="dropdown-item" href="#">nouveau</a></li>
+           
+  
+          </ul>
+        </li>
+          
+             <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tweet Bot
+          </a>
+          <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item " href="#">...</a></li>
+            <li><a class="dropdown-item" href="#">...</a></li>
+            <li><a class="dropdown-item" href="#">...</a></li>
+  
+          </ul>
+        </li>
+                  <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Chat Bot
+          </a>
+          <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item " href="#">...</a></li>
+            <li><a class="dropdown-item" href="#">...</a></li>
+            <li><a class="dropdown-item" href="#">...</a></li>
+  
+          </ul>
+        </li>
         </ul>
       </div>
     </div>

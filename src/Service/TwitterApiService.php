@@ -35,13 +35,21 @@ class TwitterApiService
     public function post(string $content)
     {
          $this->auth()->post("statuses/update", ["status" => $content]);
-        return true;
+
+        //  if ($this->auth()->getLastHttpCode() == 200) {
+        //     // Tweet posted successfully
+        // } else {
+        //     // Handle error case
+        // }
     }
 
-    public function getAlllTweet() :array{
+    public function getUserTweet() :array{
+        return $this->auth()->get("statuses/user_timeline");
+    }
+    public function getTimelimeTweet() :array{
         return $this->auth()->get("statuses/home_timeline");
     }
-
+    
     public function getTweet(int $id) :object {
         return $this->auth()->get("statuses/show", ['id' =>$id, 'tweet_mode'=> 'extended'] );
     }
@@ -56,30 +64,43 @@ class TwitterApiService
 */
     /* Mention*/
     public function getMention() :array {
-        dd ($this->auth()->get("statuses/mentions_timeline" ,  ['tweet_mode'=> 'extended']));
+     return   $this->auth()->get("statuses/mentions_timeline" );
     }
 
 
 
     /* direct message */
-    public function getDirectMessage():array {
-        dd ($this->auth()->get("direct_messages/events/list") );
-    }
+    // public function getDirectMessage():array {
+    //  dd(  $this->auth()->get("direct_messages/events/list"));
+   
+    // }
 
-    public function postDirectMessage(string $content, int $id)
+
+    public function getDirectMessage():array {
+        $id = 1354817184015421454;
+        dd(  $this->auth()->get('direct_messages/sent'));
+      
+       }
+
+    public function postDirectMessage(string $content, int $id) 
     {
 
         $params = [
             'event' => [
                 'type' => "message_create",
+              
                 'message_create' => [
+                  
                     'target' => [
                         'recipient_id' => $id
                     ],
                     'message_data' => [
-                        'text' => $content
+                        'text' => $content,
+
+                    
                     ]
                 ]
+                
             ]
         ];
         
@@ -87,6 +108,66 @@ class TwitterApiService
    
     }
 
+    public function deleteDirectMessage(int $id) :void
+    {
 
+        dd( $this->auth()->delete("direct_messages/events/destroy", ['id '=> $id]) );
 
+    }
+
+    /* direct_messages/welcome_messages */
+    public function newDirectMessageW( )
+    {
+
+        $params = [
+            'welcome_message' => [
+                'name' => "first welcome message",
+                'message_data' => [
+                    'text' => "Welcome !",
+              
+                ]
+            ]
+        ];
+      
+
+       dd(  $this->auth()->post("direct_messages/welcome_messages/new", $params, true ) );
+   
+    }
+
+/*
+    public function postDirectMessage(string $content, int $id)
+    {
+
+        $params = [
+            'event' => [
+                'type' => "message_create",
+              
+                'message_create' => [
+                  
+                    'target' => [
+                        'recipient_id' => $id
+                    ],
+                    'message_data' => [
+                        'text' => $content,
+
+                        'quick_reply' => [
+                            'type' => "options",
+                            'options' => [
+
+                                ["label" => "Red Bird"],
+                                ["label" => "Red Bird"],
+                                ["label" => "Red Bird"],
+                             
+
+                            ],
+                        ],
+                    ]
+                ]
+                
+            ]
+        ];
+        
+       dd(  $this->auth()->post("direct_messages/events/new", $params, true ) );
+   
+    }*/
 }
