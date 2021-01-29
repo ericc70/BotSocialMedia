@@ -40,7 +40,8 @@ class TweitterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $content= $form->get('message')->getData();
            $this->tweet->post($content);
-           unset($form);        }
+           $form = $this->createForm(MessageType::class);
+              }
 
         return $this->render('tweitter/post.html.twig', [
             'controller_name' => 'TweitterController',
@@ -110,9 +111,11 @@ class TweitterController extends AbstractController
      * @Route("/twitter-get-dm", name="twitterGetDm")
      */
     public function getDirectMessage(): Response
-    {$this->tweet->getDirectMessage();
+    {   
+        
         return $this->render('tweitter/dm-list.html.twig', [
-            'controller_name' => 'TweitterController',
+            "titleController" =>"List des direct message",
+            "tweets" =>$this->tweet->getDirectMessage()
         ]);
     }
     /**

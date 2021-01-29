@@ -70,17 +70,17 @@ class TwitterApiService
 
 
     /* direct message */
-    // public function getDirectMessage():array {
-    //  dd(  $this->auth()->get("direct_messages/events/list"));
+    public function getDirectMessage():object{
+   return   $this->auth()->get("direct_messages/events/list");
    
-    // }
+    }
 
 
-    public function getDirectMessage():array {
-        $id = 1354817184015421454;
-        dd(  $this->auth()->get('direct_messages/sent'));
+    // public function getDirectMessage():array {
+    //     $id = 1354817184015421454;
+    //     dd(  $this->auth()->get('direct_messages/sent'));
       
-       }
+    //    }
 
     public function postDirectMessage(string $content, int $id) 
     {

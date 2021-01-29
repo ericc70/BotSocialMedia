@@ -3,18 +3,60 @@
 {% block title %}Hello TweitterController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container-fluid mt-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h2>{{ titleController}}</h2>
+				</div>
+				<div class="col-12">
+					<table class="table table-dark table-striped">
+						<thead>
+							<tr>
+								<th scope="col">creat at</th>
+								<th scope="col">message</th>
+								<th scope="col">destinataire</th>
+								<th scope="col">expediteur</th>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+								<th scope="col"><i class="bi bi-heart-fill"></i></th>
+								<th scope="col"><i class="bi bi-arrow-repeat"></i></th>
+								<th scope="col">
+									action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for tweet in tweets.events %}
+								<tr>
+									<th scope="row">
+                                    {# {{ tweet.created_timestamp |date("r Z") }} #}
+                                    </th>
+									<td>
+										{{ tweet.message_create.message_data.text}}
+									</td>
+									<td>
+										
+									</td>
+									<td>
+						                {{ tweet.message_create.sender_id}}
+									</td>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/twiiter/src/Controller/TweitterController.php'|file_link(0) }}">src/Controller/TweitterController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/twiiter/templates/tweitter/index.html.twig'|file_link(0) }}">templates/tweitter/index.html.twig</a></code></li>
-    </ul>
-</div>
+                                    <td></td>
+                                    <td></td>
+									<td>
+										detail - edit -
+										{# <a href=" {{ path('twitterOne',{idTweet:tweet.id} ) }} ">voir</a> #}
+									</td>
+
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<pre>
+      {{ dump(tweets.events) }}
+    </pre>
+				</div>
+			</div>
+		</div>
+
+	</div>
 {% endblock %}
