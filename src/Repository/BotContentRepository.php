@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\BotContent;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method BotContent|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,8 +20,20 @@ class BotContentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, BotContent::class);
     }
+// SELECT id, text FROM bot_content ORDER BY rand() Limit 1 
+    public function randPost()
+    {
+        $conn = $this->getEntityManager()
+        ->getConnection();
+     $sql= "SELECT id, texte FROM bot_content ORDER BY rand() Limit 1 ";
+     $stmt = $conn->prepare($sql);
+     $stmt->execute();
+     return $stmt->fetch()
+    ;
 
-    // /**
+    }
+
+    //**
     //  * @return BotContent[] Returns an array of BotContent objects
     //  */
     /*

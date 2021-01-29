@@ -27,11 +27,12 @@ class BotContentController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('bot_content');
         }
-
+$random = $botContent->randPost();
         return $this->render('bot_content/index.html.twig', [
             'controller_name' => 'BotContentController',
             'form' => $form->createView(),
-            'contents' => $botContent ->findAll()
+            'contents' => $botContent ->findAll(),
+            'random' => $random
         ]);
     }
 
