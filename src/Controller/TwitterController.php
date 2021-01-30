@@ -85,7 +85,7 @@ class TwitterController extends AbstractController
     }
 
      /**
-     * @Route("/twitter/retweets/{idTweet}", name="twitterGetRetweet")
+     * @Route("/twitter/r/{idTweet}", name="twitterGetRetweet")
      */
     public function getRetweets( int $idTweet): Response
     {
@@ -118,20 +118,7 @@ class TwitterController extends AbstractController
             "tweets" =>$this->tweet->getDirectMessage()
         ]);
     }
-    /**
-     * @Route("/twitter/dmw/new", name="twitterPostDmWelcome")
-     */
-    public function newDirectMessageW(): Response
-    {
-
-        $message="sdqsdqsdqs sdqsdqsdsd";
-        // $idUser="13539855021778493454";
-        $idUser="716615506669789187";
-        $this->tweet->newDirectMessageW("$message", "$idUser");
-        return $this->render('twitter/index.html.twig', [
-            'controller_name' => 'twitterController',
-        ]);
-    }
+  
     /**
      * @Route("/twitter/dm/new", name="twitterPostDm")
      */
@@ -146,7 +133,7 @@ class TwitterController extends AbstractController
         ]);
     }
     /**
-     * @Route("/twitter/del/dm", name="twitterDelDm")
+     * @Route("/twitter/del/dm/{id}", name="twitterDelDm")
      */
     public function DelDirectMessage(int $id, string $route="twitterGetDm"): Response
     {
@@ -157,5 +144,32 @@ class TwitterController extends AbstractController
     }
 
 
-    
+    /**
+     * @Route("/twitter/welcom-message/new", name="twitterPostWelcomeMessage")
+     */
+    public function newWelcomeMessage(): Response
+    {
+//formulaire
+        $name="teste lol";
+        // $idUser="13539855021778493454";
+        $message="Si tu le reves, tu peux le faire !";
+        $this->tweet->newWelcomeMessage($name,$message);
+        return $this->render('twitter/index.html.twig', [
+            'controller_name' => 'twitterController',
+        ]);
+    }
+        /**
+     * @Route("/twitter/welcom-message", name="twitterWelcomeMessag")
+     */
+    public function getWelcomeMessage()
+    {
+        
+        
+        $this->tweet->getMessagetWelcomeMessage();
+        return $this->render('twitter/index.html.twig', [
+            'controller_name' => 'twitterController',
+        ]);
+    }
+
+
 }

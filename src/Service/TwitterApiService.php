@@ -116,14 +116,14 @@ class TwitterApiService
     }
 
     /* direct_messages/welcome_messages */
-    public function newDirectMessageW( )
+    public function newWelcomeMessage(String $name, String $message )
     {
 
         $params = [
             'welcome_message' => [
-                'name' => "first welcome message",
+                'name' => $name,
                 'message_data' => [
-                    'text' => "Welcome !",
+                    'text' => $message,
               
                 ]
             ]
@@ -132,6 +132,17 @@ class TwitterApiService
 
        dd(  $this->auth()->post("direct_messages/welcome_messages/new", $params, true ) );
    
+    }
+
+
+
+    public function getMessagetWelcomeMessage()
+    {
+        dd(   $this->auth()->get("direct_messages/welcome_messages/list" )  );
+    }
+    public function getMessagetWelcomeMessageRules()
+    {
+        dd(   $this->auth()->get("direct_messages/welcome_messages/rules/list" )  );
     }
 
 /*
