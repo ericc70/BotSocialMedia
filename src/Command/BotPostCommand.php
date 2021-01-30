@@ -32,43 +32,31 @@ class BotPostCommand extends Command
     {
         $this
             ->setDescription('Post des tweets')
-      
-        ;
+       ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-       
-
         $em = $this->entityManager;
-        
-                      // A. Access repositories
+         // A. Access repositories
         $repo = $em->getRepository("App:BotContent");
-        // B. doctrine
-            //count le nbre entree
-            
+           
         $reponse = $repo->randPost();
-            //suprresion
-         $idpost =$reponse['id'];
+        $idpost =$reponse['id'];
         $textPost = $reponse['texte'];
-       // on post le tweet
-     
-       $this->twitterApiService->post($textPost);
-     
-        // //Log connection
-        // $action ="Supression des mails reçus";
+       
+        // on post le tweet
+        $this->twitterApiService->post($textPost);
+         
+        //on reconstruit l'objet, sinon Doctrine pleure
         $rep = $repo->findOneBy(['id' => $idpost]);
-        dump($rep);
+ 
+        //log activity
         $log = new LogBotPost;
         $log->setTexte($rep);
-        // $log->setOperation($action);
         $log->setTimestamp(new DateTime());
-
         $em->persist($log);
-                
         $em->flush();
-
-
 
         return Command::SUCCESS;
     }

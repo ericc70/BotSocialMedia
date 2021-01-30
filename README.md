@@ -1,4 +1,5 @@
-# appliTwitter
+# BotSocialMedia
 
 test API twitter 
-use composer require abraham/twitteroauth
+    use : composer require abraham/twitteroauth
+test Api ...

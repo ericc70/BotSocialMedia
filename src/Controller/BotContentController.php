@@ -27,7 +27,7 @@ class BotContentController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('bot_content');
         }
-$random = $botContent->randPost();
+        $random = $botContent->randPost();
         return $this->render('bot_content/index.html.twig', [
             'controller_name' => 'BotContentController',
             'form' => $form->createView(),
