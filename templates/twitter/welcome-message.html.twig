@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TwitterController!
+{% endblock %}
+
+{% block body %}
+
+	<div class="container-fluid mt-5">
+
+		<div class="container">
+			<div class='row'>
+				<div class='col-12'>
+					<h2>
+						Welcome Message</h2>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class='row'>
+				<h3>
+					Message actif</h3>
+				<div class='col-12 bg-dark d-flex justify-content-between'>
+					<div>
+						<p></p>
+						<p>ID
+							{% for item in WMessrule.welcome_message_rules %}
+								{{ item.welcome_message_id }}
+							{% endfor %}
+						</p>
+					</div>
+					<div>
+						<a class="button" href="#">
+							<i class="bi bi-x-square-fill" style="font-size: 2rem; color: red;"></i>
+						</a>
+					</div>
+
+				</div>
+				<p>1 seul message doit etre selectionne, supprimes le avant en remettre un autre</p>
+			</div>
+		</div>
+
+
+		<div class="container mb-5">
+			<div class='row'>
+				<div class='col-12'>
+					<div class="col-12">
+						<table class="table table-dark table-striped">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">creat at</th>
+									<th scope="col">message</th>
+									<th scope="col">name</th>
+									<th scope="col">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+
+
+								{% for Wmes in Wmess.welcome_messages %}
+
+									<tr>
+										<td {% if Wmes.id == WMessrule.welcome_message_rules.0.welcome_message_id %} style="background:blue !important" {% endif %}>{{ Wmes.id}}</td>
+										<td>{{ Wmes.created_timestamp}}</td>
+										<td>{{Wmes.message_data.text }}</td>
+										<td>{{ Wmes.name}}</td>
+
+										<td>Selected, modifier, vue</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+							<tbody></tbody>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+		{% endblock %}

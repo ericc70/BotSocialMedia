@@ -163,9 +163,37 @@ class TwitterController extends AbstractController
      */
     public function getWelcomeMessage()
     {
+        //formulaire de creation
+
+        //
+        
+     
+        return $this->render('twitter/welcome-message.html.twig', [
+            'controller_name' => 'twitterController',
+            'Wmess' =>$this->tweet->getMessagetWelcomeMessage(),
+            'WMessrule' => $this->tweet->getMessagetWelcomeMessageRules()
+        ]);
+    }
+        /**
+     * @Route("/twitter/welcom-message/rules", name="twitterWelcomeMessageRules")
+     */
+    // public function getMessagetWelcomeMessageRules()
+    // {
         
         
-        $this->tweet->getMessagetWelcomeMessage();
+    //     $this->tweet->getMessagetWelcomeMessageRules();
+    //     return $this->render('twitter/index.html.twig', [
+    //         'controller_name' => 'twitterController',
+    //     ]);
+    // }
+        /**
+     * @Route("/twitter/welcom-message/rules/new", name="twitterWelcomeMessagRulesNew")
+     */
+    public function rulesWelcomeMessage()
+    {
+ 
+        
+        $this->tweet->rulesWelcomeMessage($id);
         return $this->render('twitter/index.html.twig', [
             'controller_name' => 'twitterController',
         ]);

@@ -115,7 +115,7 @@ class TwitterApiService
 
     }
 
-    /* direct_messages/welcome_messages */
+    /* welcome_messages */
     public function newWelcomeMessage(String $name, String $message )
     {
 
@@ -129,8 +129,7 @@ class TwitterApiService
             ]
         ];
       
-
-       dd(  $this->auth()->post("direct_messages/welcome_messages/new", $params, true ) );
+       $this->auth()->post("direct_messages/welcome_messages/new", $params, true  );
    
     }
 
@@ -138,12 +137,40 @@ class TwitterApiService
 
     public function getMessagetWelcomeMessage()
     {
-        dd(   $this->auth()->get("direct_messages/welcome_messages/list" )  );
+    return      $this->auth()->get("direct_messages/welcome_messages/list"   );
     }
     public function getMessagetWelcomeMessageRules()
     {
-        dd(   $this->auth()->get("direct_messages/welcome_messages/rules/list" )  );
+       return    $this->auth()->get("direct_messages/welcome_messages/rules/list"   );
     }
+
+    public function rulesWelcomeMessage( $id)
+    {
+          $params = [
+            'welcome_message_rule' => [
+                'welcome_message_id' => $id,
+            ]
+        ];
+
+         $this->auth()->post("direct_messages/welcome_messages/rules/new", $params, true );
+         
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
 
 /*
     public function postDirectMessage(string $content, int $id)
@@ -181,4 +208,3 @@ class TwitterApiService
        dd(  $this->auth()->post("direct_messages/events/new", $params, true ) );
    
     }*/
-}
