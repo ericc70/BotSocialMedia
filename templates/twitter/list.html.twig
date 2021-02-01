@@ -39,8 +39,10 @@
 										{{ tweet.retweet_count}}
 									</td>
 									<td>
-										detail - edit -
-										<a href=" {{ path('twitterOne',{idTweet:tweet.id} ) }} ">voir</a>
+										<a href="{{ path('twitterOne',{idTweet:tweet.id} ) }}">voir </a>
+										{% if myAccount.id == tweet.user.id %}
+											supprimer
+										{% endif %}
 									</td>
 
 								</tr>

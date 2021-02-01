@@ -47,3 +47,7 @@ input,textarea,select,option{
   color: rgba(224, 201, 201, 0.55) !important;
 
 }
+
+.form-group{
+  margin-bottom: 1.5rem !important;
+}

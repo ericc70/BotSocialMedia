@@ -15,27 +15,49 @@
 				</div>
 			</div>
 		</div>
+
+		{% if Wmess.welcome_messages is defined %}
+			
+
+			
+
+				<div class="container">
+			<div class='row'>
+			<div class="col-12">
+				Nouveau message
+			</div>
+				<div class='col-12'>
+
+					{{form(form)}}
+			
+				</div>
+			</div>
+		</div>
 		<div class="container">
 			<div class='row'>
 				<h3>
 					Message actif</h3>
 				<div class='col-12 bg-dark d-flex justify-content-between'>
-					<div>
-						<p></p>
-						<p>ID
-							{% for item in WMessrule.welcome_message_rules %}
-								{{ item.welcome_message_id }}
-							{% endfor %}
-						</p>
-					</div>
-					<div>
-						<a class="button" href="#">
-							<i class="bi bi-x-square-fill" style="font-size: 2rem; color: red;"></i>
-						</a>
-					</div>
+					{% if WMessrule.welcome_message_rules is defined  %}
+						{% for item in WMessrule.welcome_message_rules %}
+							<div>
+								<p>ID
+									{{ item.welcome_message_id }}
+								</p>
+							</div>
+							<div>
+								<a class="button" href="{{ path('twitterWelcomeMessagRulesDelete', {id:item.id,token: csrf_token('delete_welcomeMessageRules') }) }} " onclick="return confirm('Voulez vous vraiment supprimer ?')">
+									<i class="bi bi-x-square-fill" style="font-size: 2rem; color: red;"></i>
+								</a>
+							</div>
+						{% endfor %}
+					{% else %}
+						<p>Aucun message selectionné</p>
+					{% endif %}
+
 
 				</div>
-				<p>1 seul message doit etre selectionne, supprimes le avant en remettre un autre</p>
+				<p>Info : 1 seul message doit être selectionné, supprimes le, avant en remettre un autre</p>
 			</div>
 		</div>
 
@@ -56,16 +78,25 @@
 							</thead>
 							<tbody>
 
-
 								{% for Wmes in Wmess.welcome_messages %}
 
 									<tr>
-										<td {% if Wmes.id == WMessrule.welcome_message_rules.0.welcome_message_id %} style="background:blue !important" {% endif %}>{{ Wmes.id}}</td>
-										<td>{{ Wmes.created_timestamp}}</td>
+										{% if WMessrule.welcome_message_rules is defined  %}
+											<td {% if Wmes.id == WMessrule.welcome_message_rules.0.welcome_message_id %} style="background:blue !important" {% endif %}>{{ Wmes.id}}</td>
+										{% else %}
+											<td>{{ Wmes.id}}
+											</td>
+										{% endif %}
+										<td>{{ Wmes.created_timestamp |slice (0,10)|format_datetime( locale='fr')}}</td>
+										{# <td>{{ Wmes.created_timestamp |localeDate('long', 'short')}}</td> #}
 										<td>{{Wmes.message_data.text }}</td>
 										<td>{{ Wmes.name}}</td>
-
-										<td>Selected, modifier, vue</td>
+										<td>
+											<a href="{{ path('twitterWelcomeMessagRulesAdd',{id:Wmes.id }  ) }}"><i class="bi bi-check2-circle"></i></a>
+											<a href="{{ path('twitterWelcomeMessageDelete',{id:Wmes.id,token: csrf_token('delete_welcomeMessage') }) }} "onclick="return confirm('Voulez vous vraiment supprimer ?')"><i class="bi bi-trash-fill"></i></a>
+									
+											
+										</td>
 									</tr>
 								{% endfor %}
 							</tbody>
@@ -76,6 +107,11 @@
 
 
 			</div>
-
+{% else %}
+			<pre>
+				<I> Twitter information :</i><br >
+				{{ Wmess.errors.0.message }}
+			</pre>
+		{% endif %}
 
 		{% endblock %}

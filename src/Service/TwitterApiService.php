@@ -27,11 +27,11 @@ class TwitterApiService
         return $connection;
     }
 
-    public function verifConnection()
-    {
-        dd($this->auth()->get("account/verify_credentials"));
+    public function myAccount(){
+      return $this->auth()->get("account/verify_credentials");
+
     }
-    
+
     public function post(string $content)
     {
          $this->auth()->post("statuses/update", ["status" => $content]);
@@ -57,7 +57,15 @@ class TwitterApiService
     public function getRetweets(int $id) :array {
         return $this->auth()->get("statuses/retweets", ['id' =>$id] );
     }
-/*
+
+    public function deleteTweet($id){
+
+          $this->auth()->post("statuses/destroy", ['id' =>$id] );
+    }
+   
+
+
+    /*
     public function uploadImage(string $content) :array {
         dd ($this->auth()->get("media/upload", ['media' =>$content]) );
     }
@@ -104,14 +112,14 @@ class TwitterApiService
             ]
         ];
         
-       dd(  $this->auth()->post("direct_messages/events/new", $params, true ) );
+         $this->auth()->post("direct_messages/events/new", $params, true  );
    
     }
 
     public function deleteDirectMessage(int $id) :void
     {
 
-        dd( $this->auth()->delete("direct_messages/events/destroy", ['id '=> $id]) );
+         $this->auth()->delete("direct_messages/events/destroy", ['id '=> $id]);
 
     }
 
@@ -124,7 +132,6 @@ class TwitterApiService
                 'name' => $name,
                 'message_data' => [
                     'text' => $message,
-              
                 ]
             ]
         ];
@@ -144,7 +151,7 @@ class TwitterApiService
        return    $this->auth()->get("direct_messages/welcome_messages/rules/list"   );
     }
 
-    public function rulesWelcomeMessage( $id)
+    public function rulesWelcomeMessage(int $id)
     {
           $params = [
             'welcome_message_rule' => [
@@ -152,13 +159,37 @@ class TwitterApiService
             ]
         ];
 
-         $this->auth()->post("direct_messages/welcome_messages/rules/new", $params, true );
+    return     $this->auth()->post("direct_messages/welcome_messages/rules/new", $params, true );
          
     }
 
+    public function deleteWelcomeMessage($id){
+
+        $this->auth()->delete("direct_messages/welcome_messages/destroy", ['id' =>$id]);
+    }
+
+    public function deleteWelcomeMessageRules($id){
+
+      $this->auth()->delete("direct_messages/welcome_messages/rules/destroy", ['id' =>$id] );
+    }
 
 
+    public function showWelecomeMessage($id){
+        return $this->auth()->get("direct_messages/welcome_messages/show", ['id' =>$id] ) ;
 
+    }
+
+    // public function putWelcomeMessage(String $message, int $id){
+    //     $params = [
+            
+    //                 'message_data' => [
+    //                 'text' => $message,
+    //                       ]
+    //     ];
+     
+    //  dd(  $this->auth()->put("direct_messages/welcome_messages/update" )   );
+    // }
+  
 
 }
 
