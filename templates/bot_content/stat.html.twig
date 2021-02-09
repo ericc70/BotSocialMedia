@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BotContentController!{% endblock %}
+
+{% block body %}
+<section class="container my-5">
+{{ form_start(form ) }}
+    <div class="row d-flex">
+
+        <div class="col-12 col-md-10">
+            	{{  form_errors(form.texte)}}
+						{# {{ form_label(form.texte, 'tete') }} #}
+						{{ form_widget(form.texte) }}
+        </div>
+        
+        <div class="col-12 col-md-2">
+            	{{ form_widget(form.Ajouter) }}
+        </div>
+
+
+    </div>
+{{ form_end(form) }}
+</section>
+
+<pre>
+    {{ dump(random) }}
+</pre>
+
+	<div class="container-fluid mt-5">
+		<div class="container">
+			<div class="row">
+			
+				<div class="col-12">
+					<table class="table table-dark table-striped">
+						<thead>
+							<tr>
+								<th scope="col">id</th>
+								<th scope="col">texte</th>
+						
+								<th scope="col">action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for content in contents %}
+								<tr>
+									<th scope="row">{{ content.id   }}</th>
+									<td>
+										{{ content.texte}}
+									</td>
+							
+									<td>
+										detail - edit -
+										
+									</td>
+
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}

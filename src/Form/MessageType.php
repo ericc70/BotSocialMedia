@@ -17,7 +17,8 @@ class MessageType extends AbstractType
             'label' => false,
             'required' => true,
             'attr'=>[
-                'placeholder' => 'Votre messsage'
+                'placeholder' => 'Votre messsage',
+                'maxlength' => 240
             ]
         ])
         ->add('Envoyer', SubmitType::class)

@@ -8,7 +8,11 @@ parameters:
     TWITTER_CONSUMER_SECRET: '%env(TWITTER_CONSUMER_SECRET)%'
     TWITTER_ACCESS_TOKEN: '%env(TWITTER_ACCESS_TOKEN)%'
     TWITTER_ACCESS_TOKEN_SECRET: '%env(TWITTER_ACCESS_TOKEN_SECRET)%'
-
+    
+    MASTODON_INSTANCE: '%env(MASTODON_INSTANCE)%'
+    MASTODON_ID_APP: '%env(MASTODON_ID_APP)%'
+    MASTODON_SECRET: '%env(MASTODON_SECRET)%'
+    MASTODON_JETON: '%env(MASTODON_JETON)%'
 services:
     # default configuration for services in *this* file
     _defaults:

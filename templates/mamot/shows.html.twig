@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mastodon Timeline!
+{% endblock %}
+
+{% block body %}
+	<section class="container my-4">
+		<div class="row">
+			<div class="col-12">
+				<h2>
+					Détail du pouet id
+					{{ pouet.id }}
+				</h2>
+			</div>
+		</div>
+	</section>
+
+	<div class="container px-4">
+		<div class="row gx-3">
+			<div class="col">
+				<div class="p-3  bg-dark">
+
+					<p>{{pouet.favourites_count}}
+						like(s)</p>
+
+					<p>{{pouet.reblogs_count}}
+						repouets</p>
+
+					<p>{{pouet.replies_count}}
+						replies</p>
+				</div>
+			</div>
+			<div class="col">
+				<div class="p-3  bg-dark">
+					<p class="title-view">Auteur</p>
+					<p>
+						{{ pouet.account.display_name }} ( {{ pouet.account.username }} ) </p>
+					<p>
+						<a href="#" class="btn btn-primary">
+							Envoyer DM</a>
+					</p>
+				</div>
+			</div>
+			<div class="col">
+				<div class="p-3  bg-dark">
+					<p class="title-view">Date creation</p>
+					<p>
+						{{ pouet.created_at|date('D d m Y H:m:s') }}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container px-4 mt-3">
+		<div class="row gx-3">
+
+			<div class="col">
+				<div class="p-3  bg-dark">
+					<p class="title-view">Pouet</p>
+					<p>
+						{{ pouet.content | raw }}</p>
+					</div>
+				</div>
+				<div class="col">
+					<div class="p-3  bg-dark">
+						<p class="title-view">Media</p>
+						{% for media in pouet.media_attachments %}
+						{{media.type}}<br>
+								<img class="img-fluid" src=" {{ media.preview_url}}"><br>
+								<a href="{{media.url}}">voir</a>
+						{% endfor %}
+					</div>
+				</div>
+
+				<div class="col">
+					<div class="p-3  bg-dark">
+						<p class="title-view">Tags</p>
+						<p>
+						{% for tag in pouet.tags %}
+							{{tag.name}} <br>
+						{% endfor %}
+					</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<pre>
+	{{ dump(pouet) }}
+</pre>
+	{% endblock %}
