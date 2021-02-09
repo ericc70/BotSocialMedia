@@ -13,6 +13,8 @@ parameters:
     MASTODON_ID_APP: '%env(MASTODON_ID_APP)%'
     MASTODON_SECRET: '%env(MASTODON_SECRET)%'
     MASTODON_JETON: '%env(MASTODON_JETON)%'
+    
+    PASS_SECURITY: '%env(PAGESECURITY)%'
 services:
     # default configuration for services in *this* file
     _defaults:
