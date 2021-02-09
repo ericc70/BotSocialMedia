@@ -60,6 +60,7 @@ class MamotController extends AbstractController
             'controller_name' => 'MamotController',
         ]);
     }
+    
      /**
      * @Route("status", name="status")
      */
