@@ -55,20 +55,15 @@ class BotContentController extends AbstractController
             //
            //si check twitter
            // dd($check);
-            foreach ($check as $key => $value){
-              
+            foreach ($check as $key => $value){        
                 if ($value=='1'){
-                 
                     $servicemamot->newPouet(['status'=>$content]);
                 }
                 if ($value=='2'){
-                    // appel service twiiter
-                    //send post
                    $serviceTwitter->post($content);
                 }
             }
-            die();
-        //    $this->mamot->newPouet(['status'=>$content]);
+
                 
             // si check mamot
 

@@ -3,5 +3,18 @@
 {% block title %}Hello BotContentController!{% endblock %}
 
 {% block body %}
-{{form(form)}}
+<section class='container-fluid'>
+    <div class="container">
+        <div class='row mt-3'>
+            <div class="col-12"><h2>Envoyer un message sur plusieurs réseaux</h2></div>
+        </div>
+        <div class='row mt-4'>
+            <div class="col-12">
+            {{form(form)}}
+            </div>
+        </div>
+    </div>
+</section>
+
+
 {% endblock %}

@@ -23,7 +23,7 @@ class BotMessageType extends AbstractType
             'required' => true,
             'multiple' => true,
             'expanded' => true,
-
+            'label' =>false
         ])
              ->add('message',  TextareaType::class, [
             'label' => false,
