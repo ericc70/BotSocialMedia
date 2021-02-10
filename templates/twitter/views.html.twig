@@ -17,7 +17,7 @@
 	</section>
 
 	<div class="container px-4">
-		<div class="row gx-4">
+		<div class="row gx-3">
 			<div class="col">
 				<div class="p-3  bg-dark">{{tweet.favorite_count}}
 					like(s)</div>
@@ -51,7 +51,7 @@
 	</div>
 
 	<div class="container px-4 mt-2">
-		<div class="row gx-5">
+		<div class="row gx-3">
 
 			<div class="col">
 				<div class="p-3  bg-dark ">
@@ -62,21 +62,37 @@
 			<div class="col">
 				<div class="p-3  bg-dark">
 					<p class="title-view">Média</p>
+	
+
 					{% if tweet.entities.media  is defined %}
-						{% for media in tweet.entities.media %}
-							type :
+						{% for media in tweet.extended_entities.media %}
+					<p>
+						type :
 							{{media.type}}
 							<img class="img-fluid" src=" {{ media.media_url_https}}">
+					</p>
 						{% endfor %}
 						<br>
-						<a href="#">Voir plus</a>
+						{# <a href="#">Voir plus</a> #}
 					{% endif %}
 				</div>
 			</div>
+				<div class="col">
+					<div class="p-3  bg-dark">
+						<p class="title-view">
+							Listes des hashtags</p>
+						<ul>
+							{% for hashtag in tweet.entities.hashtags %}
+								<li>
+									{{ hashtag.text}}</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
 		</div>
 
 
-		<div class="container px-4 mt-2">
+		{# <div class="container px-4 mt-2">
 			<div class="row gx-5">
 				<div class="col">
 					<div class="p-3  bg-dark">
@@ -98,7 +114,7 @@
 					<div class="p-3  bg-dark">Auteur</div>
 				</div>
 			</div>
-		</div>
+		</div> #}
 		<pre>
   {{ dump(tweet) }}
 </pre>

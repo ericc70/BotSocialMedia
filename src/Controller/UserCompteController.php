@@ -16,9 +16,9 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class UserCompteController extends AbstractController
 {
     /**
-     * @Route("/user/compte/", name="user_compte")
+     * @Route("/user/compte/new", name="user_compte")
      */
-    public function index(Request $request, EntityManagerInterface $em, ParameterBagInterface $getParams, UserPasswordEncoderInterface $passwordEncoder):Response
+    public function new(Request $request, EntityManagerInterface $em, ParameterBagInterface $getParams, UserPasswordEncoderInterface $passwordEncoder):Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -44,6 +44,8 @@ class UserCompteController extends AbstractController
         //    $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+
+            
         }
         return $this->render('user_compte/index.html.twig', [
             'controller_name' => 'UserCompteController',
