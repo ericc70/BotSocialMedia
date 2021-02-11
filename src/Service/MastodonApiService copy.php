@@ -49,7 +49,10 @@ class MastodonApiService
 
     public function getAccount():array
     {
-        $response = $this->client->request('GET', '/api/v1/accounts/verify_credentials');
+        $response = $this->client->request('GET', 'https://mamot.fr/api/v1/accounts/verify_credentials',
+         [
+            'auth_bearer' => $this->jeton,
+        ]);
         return $response->toArray();
     }
 
@@ -86,9 +89,9 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'GET',
-            'api/v1/timelines/home',
+            'https://mamot.fr/api/v1/timelines/home',
             [
-              
+                'auth_bearer' => $this->jeton,
                 'query' => $arrayPathQuery
             ]
         );
@@ -102,8 +105,9 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'GET',
-            '/api/v1/accounts/' . $id . '/statuses',
+            'https://mamot.fr/api/v1/accounts/' . $id . '/statuses',
             [
+                'auth_bearer' => $this->jeton,
                 'query' => $arrayPathQuery
             ]
         );
@@ -129,9 +133,9 @@ class MastodonApiService
 
         $response = $this->client->request(
             'POST',
-            "/api/v1/statuses",
+            "https://mamot.fr/api/v1/statuses",
             [
-               
+                'auth_bearer' => $this->jeton,
                 'body' => $arrayDataParametre
             ]
         );
@@ -141,10 +145,10 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'DELETE',
-            '/api/v1/statuses/' . $id
-            
-                
-            
+            'https://mamot.fr/api/v1/statuses/' . $id,
+            [
+                'auth_bearer' => $this->jeton,
+            ]
         );
         // dd($response->getStatusCode());
     }
@@ -165,7 +169,7 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'GET',
-            '/api/v1/statuses/' . $id . '/reblogged_by',
+            'https://mamot.fr/api/v1/statuses/' . $id . '/reblogged_by',
             [
                 // 'auth_bearer' => $this->jeton,
 
@@ -180,7 +184,7 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'GET',
-            '/api/v1/statuses/' . $id . '/favourited_by',
+            'https://mamot.fr/api/v1/statuses/' . $id . '/favourited_by',
             [
                 // 'auth_bearer' => $this->jeton,
 
@@ -200,9 +204,9 @@ class MastodonApiService
 
         $response = $this->client->request(
             'GET',
-            '/api/v1/statuses/' . $id . '/pin',
+            'https://mamot.fr/api/v1/statuses/' . $id . '/pin',
             [
-          
+                'auth_bearer' => $this->jeton,
             ]
         );
         dd($response->toArray());
@@ -219,9 +223,9 @@ class MastodonApiService
 
         $response = $this->client->request(
             'GET',
-            '/api/v1/statuses/' . $id . '/unpin',
+            'https://mamot.fr/api/v1/statuses/' . $id . '/unpin',
             [
-           
+                'auth_bearer' => $this->jeton,
 
             ]
         );
@@ -237,9 +241,9 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'GET',
-            '/api/v1/notifications',
+            'https://mamot.fr/api/v1/notifications',
             [
-             
+                'auth_bearer' => $this->jeton,
                 'query' => $arrayPathQuery
             ]
         );
@@ -252,9 +256,9 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'GET',
-            '/api/v2/search',
+            'https://mamot.fr/api/v2/search',
             [
-                
+                'auth_bearer' => $this->jeton,
                 'query' => $arrayPathQuery
             ]
         );

@@ -1,117 +1,119 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TwitterController!
+{% block title %}Welcome message
 {% endblock %}
 
 {% block body %}
 
-	<div class="container-fluid mt-5">
+	 <div class="container-fluid mt-5">
 
 		<div class="container">
 			<div class='row'>
 				<div class='col-12'>
-					<h2>
-						Welcome Message</h2>
+					<h2>	Welcome Message</h2>
 				</div>
 			</div>
 		</div>
+	</div> 
+	{% if Wmess.welcome_messages is defined %}
 
-		{% if Wmess.welcome_messages is defined %}
-			
 
-			
-
-				<div class="container">
+		 <div class="container">
 			<div class='row'>
-			<div class="col-12">
-				Nouveau message
-			</div>
+				<div class="col-12">
+					Nouveau message
+				</div>
 				<div class='col-12'>
-
 					{{form(form)}}
-			
 				</div>
 			</div>
-		</div>
-		<div class="container">
+		</div> 
+
+		 <div class="container">
 			<div class='row'>
-				<h3>
-					Message actif</h3>
-				<div class='col-12 bg-dark d-flex justify-content-between'>
-					{% if WMessrule.welcome_message_rules is defined  %}
-						{% for item in WMessrule.welcome_message_rules %}
-							<div>
-								<p>ID
-									{{ item.welcome_message_id }}
-								</p>
-							</div>
-							<div>
-								<a class="button" href="{{ path('twitterWelcomeMessagRulesDelete', {id:item.id,token: csrf_token('delete_welcomeMessageRules') }) }} " onclick="return confirm('Voulez vous vraiment supprimer ?')">
-									<i class="bi bi-x-square-fill" style="font-size: 2rem; color: red;"></i>
-								</a>
-							</div>
-						{% endfor %}
-					{% else %}
-						<p>Aucun message selectionné</p>
-					{% endif %}
+				<h3>Message actif</h3>
+					
+					<div class='col-12 bg-dark d-flex justify-content-between'>
+						{% if WMessrule.welcome_message_rules is defined  %}
+							{% for item in WMessrule.welcome_message_rules %}
+								<div>
+									<p>ID
+										{{ item.welcome_message_id }}
+									</p>
+								</div>
+								<div>
+									<a class="button" href="{{ path('twitterWelcomeMessagRulesDelete', {id:item.id,token: csrf_token('delete_welcomeMessageRules') }) }} " onclick="return confirm('Voulez vous vraiment supprimer ?')">
+										<i class="bi bi-x-square-fill" style="font-size: 2rem; color: red;"></i>
+									</a>
+								</div>
+							{% endfor %}
+							{% else %}
+								<p>Aucun message selectionné</p>
+						{% endif %}
 
 
-				</div>
-				<p>Info : 1 seul message doit être selectionné, supprimes le, avant en remettre un autre</p>
-			</div>
-		</div>
-
-
-		<div class="container mb-5">
-			<div class='row'>
-				<div class='col-12'>
-					<div class="col-12">
-						<table class="table table-dark table-striped">
-							<thead>
-								<tr>
-									<th scope="col">ID</th>
-									<th scope="col">creat at</th>
-									<th scope="col">message</th>
-									<th scope="col">name</th>
-									<th scope="col">Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								{% for Wmes in Wmess.welcome_messages %}
-
-									<tr>
-										{% if WMessrule.welcome_message_rules is defined  %}
-											<td {% if Wmes.id == WMessrule.welcome_message_rules.0.welcome_message_id %} style="background:blue !important" {% endif %}>{{ Wmes.id}}</td>
-										{% else %}
-											<td>{{ Wmes.id}}
-											</td>
-										{% endif %}
-										<td>{{ Wmes.created_timestamp |slice (0,10)|format_datetime( locale='fr')}}</td>
-										{# <td>{{ Wmes.created_timestamp |localeDate('long', 'short')}}</td> #}
-										<td>{{Wmes.message_data.text }}</td>
-										<td>{{ Wmes.name}}</td>
-										<td>
-											<a href="{{ path('twitterWelcomeMessagRulesAdd',{id:Wmes.id }  ) }}"><i class="bi bi-check2-circle"></i></a>
-											<a href="{{ path('twitterWelcomeMessageDelete',{id:Wmes.id,token: csrf_token('delete_welcomeMessage') }) }} "onclick="return confirm('Voulez vous vraiment supprimer ?')"><i class="bi bi-trash-fill"></i></a>
-									
-											
-										</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-							<tbody></tbody>
-						</div>
 					</div>
+					<p>Info : 1 seul message doit être selectionné, supprimes le, avant en remettre un autre</p>
 				</div>
+			</div> 
 
 
-			</div>
-{% else %}
-			<pre>
+			 <div class="container mb-5">
+			 
+				<div class='row'> 
+					<div class='col-12'>
+						 {# <div class="col-12"> #}
+							<table class="table table-dark table-striped"> 
+								 <thead>
+									<tr>
+										<th scope="col">ID</th>
+										<th scope="col">creat at</th>
+										<th scope="col">message</th>
+										<th scope="col">name</th>
+										<th scope="col">Actions</th>
+									</tr>
+								</thead>
+								<tbody> 
+
+									{% for Wmes in Wmess.welcome_messages %}
+
+										<tr>
+											{% if WMessrule.welcome_message_rules is defined  %}
+												<td {% if Wmes.id == WMessrule.welcome_message_rules.0.welcome_message_id %} style="background:blue !important" {% endif %}>{{ Wmes.id}}</td>
+											{% else %}
+												<td>{{ Wmes.id}}
+												</td>
+											{% endif %}
+											<td>{{ Wmes.created_timestamp |slice (0,10)|format_datetime( locale='fr')}}</td>
+											{# {# <td>{{ Wmes.created_timestamp |localeDate('long', 'short')}}</td> #}
+											<td>{{Wmes.message_data.text }}</td> 
+											<td>{{ Wmes.name}}</td>
+											<td>
+												<a href="{{ path('twitterWelcomeMessagRulesAdd',{id:Wmes.id } ) }}">
+													<i class="bi bi-check2-circle"></i>
+												</a>
+												<a href="{{ path('twitterWelcomeMessageDelete',{id:Wmes.id,token: csrf_token('delete_welcomeMessage') }) }} " onclick="return confirm('Voulez vous vraiment supprimer ?')">
+													<i class="bi bi-trash-fill"></i>
+												</a>
+
+
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+							</div> 
+						</div> 
+					</div> 
+
+{# 
+				</div>#}
+			{% else %}
+				<pre>
 				<I> Twitter information :</i><br >
 				{{ Wmess.errors.0.message }}
-			</pre>
-		{% endif %}
+			</pre> #}
+
+			 {% endif %} 
 
 		{% endblock %}

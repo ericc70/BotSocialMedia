@@ -1,91 +1,141 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">  <!-- Required meta tags -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta
+		charset="UTF-8">
+		<!-- Required meta tags -->
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/bootstrap-icons\font\bootstrap-icons.css">
-  <link rel="stylesheet" href="/styles.css">
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/bootstrap-icons\font\bootstrap-icons.css">
+		<link rel="stylesheet" href="/styles.css">
 
 
-        <title>{% block title %}Gestion media social!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+		<title>
+			{% block title %}Gestion media social!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}{% endblock %}
 
-       
-    </head>
-    <body>
-     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">LittleBot</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
 
-         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Twitter
-          </a>
-          <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item " href="{{ path('twitter-timeline') }}">Timelime</a></li>
-            <li><a class="dropdown-item" href="{{ path('twitter-mes-tweets') }}">Mes tweets</a></li>
-            <li><a class="dropdown-item" href="{{path('twitteMntions') }}">Mentions</a></li>
-            <li><a class="dropdown-item" href="{{path('twitterPost') }}">nouveau tweet</a></li>
-            <li><a class="dropdown-item " href="#">Liste DM</a></li>
-            <li><a class="dropdown-item" href="#">Nouveau DM</a></li>
-              <li><a class="dropdown-item " href="#">Welcome meassage</a></li>
-            <li><a class="dropdown-item" href="#">...</a></li>
-            <li><a class="dropdown-item" href="#">...</a></li>
-  
-          </ul>
-        </li>
-                  <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Mastodon
-          </a>
-          <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item " href="#">...</a>
-            <li><a class="dropdown-item" href="#">....</a></li>
-            <li><a class="dropdown-item" href="#">...</a></li>
-          </ul>
-        </li>
-             <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Bot
-          </a>
-          <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item " href="{{ path('bot_content') }}">Content bot</a>
-            <li><a class="dropdown-item" href="#">Statistique</a></li>
-            <li><a class="dropdown-item" href="#">...</a></li>
-          </ul>
-        </li>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
- 
-        </ul>
-      </div>
-    </div>
-  </nav>
-        {% block body %}{% endblock %}
-  <footer  class="py-2 bg-dark container-fluid">
-<div class="container">
-  <div class="row">
-  <div class="col-12 col-md-6"></div>
-  <div class="col-12 col-md-6 text-end">Fait avec <i class="bi bi-heart-fill heartbeat"></i> en  France par <a href="https://ericc70.fr">ericc70 </a></div>
-  </div>
-</div>
-  </footer>      
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
-  </script>
-         {% block javascripts %}{% endblock %}
-    </body>
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">LittleBot</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				{% if is_granted('ROLE_USER') %}
+					<div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#">Home</a>
+							</li>
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Twitter
+								</a>
+								<ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+									<li>
+										<a class="dropdown-item " href="{{ path('twitter-timeline') }}">Timelime</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('twitter-mes-tweets') }}">Mes tweets</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{path('twitteMntions') }}">Mentions</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{path('twitterPost') }}">nouveau tweet</a>
+									</li>
+									<li>
+										<a class="dropdown-item " href="#">Liste DM</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">Nouveau DM</a>
+									</li>
+									<li>
+										<a class="dropdown-item " href="#">Welcome meassage</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">...</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">...</a>
+									</li>
+
+								</ul>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Mastodon
+								</a>
+								<ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+									<li>
+										<a class="dropdown-item " href="{{path('mamot-timeline-home') }}">Home timeline</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{path('mamot-timeline') }}">Timeline</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{path('mamot-status') }}">Pouet message</a>
+									</li>
+								</ul>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Bot
+								</a>
+								<ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+									<li>
+										<a class="dropdown-item " href="{{ path('bot_content') }}">Content bot</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">Statistique</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">...</a>
+									</li>
+								</ul>
+							</li>
+
+
+						</ul>
+
+						<div class="d-flex  me-3">
+							<a href="#"  class="btn btn-danger " >Deconnecter</a>
+
+						</div>
+					</div>
+
+				{% endif %}
+			</div>
+		</nav>
+		{% block body %}
+    {% endblock %}
+
+		<footer class="py-2 bg-dark container-fluid">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-md-6"></div>
+					<div class="col-12 col-md-6 text-end">Fait avec
+						<i class="bi bi-heart-fill heartbeat"></i>
+						en  France par
+						<a href="https://ericc70.fr">ericc70
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- Option 1: Bootstrap Bundle with Popper -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+		{% block javascripts %}{% endblock %}
+	</body>
 </html>

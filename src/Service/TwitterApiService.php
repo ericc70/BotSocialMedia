@@ -179,6 +179,10 @@ class TwitterApiService
 
     }
 
+    public function showUsers($id){
+        return $this->auth()->get("users/show", ['id' =>$id] ) ;
+
+    }
     // public function putWelcomeMessage(String $message, int $id){
     //     $params = [
             

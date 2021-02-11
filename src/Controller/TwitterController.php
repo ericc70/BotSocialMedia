@@ -122,7 +122,8 @@ class TwitterController extends AbstractController
 
         return $this->render('twitter/dm-list.html.twig', [
             "titleController" => "List des direct message",
-            "tweets" => $this->tweet->getDirectMessage()
+            "tweets" => $this->tweet->getDirectMessage(),
+            'myAccount' => $this->tweet->myAccount()
         ]);
     }
 
@@ -232,5 +233,16 @@ class TwitterController extends AbstractController
 
         $this->tweet->deleteWelcomeMessage($id);
         return $this->redirectToRoute('twitterWelcomeMessag');
+    }
+
+    public function showUsers($id){
+
+    
+        return $this->render('twitter/showUsers.html.twig', [
+           
+            'TWuser' => $this->tweet->showUsers($id)
+           
+          
+        ]);
     }
 }

@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TweitterController!{% endblock %}
+{% block title %}Hello TweitterController!
+{% endblock %}
 
 {% block body %}
-<div class="container-fluid mt-5">
+	<div class="container-fluid mt-5">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -18,8 +19,7 @@
 								<th scope="col">destinataire</th>
 								<th scope="col">expediteur</th>
 
-								<th scope="col"><i class="bi bi-heart-fill"></i></th>
-								<th scope="col"><i class="bi bi-arrow-repeat"></i></th>
+								
 								<th scope="col">
 									action</th>
 							</tr>
@@ -27,21 +27,34 @@
 						<tbody>
 							{% for tweet in tweets.events %}
 								<tr>
-									<th scope="row">
-                                    {# {{ tweet.created_timestamp |date("r Z") }} #}
-                                    </th>
+									<th
+										scope="row">{{ tweet.created_timestamp |slice (0,10)|format_datetime( locale='fr')}}
+																			</th>
 									<td>
 										{{ tweet.message_create.message_data.text}}
 									</td>
 									<td>
-										
+										{% if tweet.message_create.target.recipient_id == myAccount.id %}
+											<span>MOI<span>
+										{% else %}
+											{{ render(controller('App\\Controller\\TwitterController:showUsers', { 'id':tweet.message_create.target.recipient_id } ))  }}
+										{% endif %}
+
+
+										{# {{ tweet.message_create.target.recipient_id}} #}
 									</td>
 									<td>
-						                {{ tweet.message_create.sender_id}}
+										{% if tweet.message_create.sender_id  == myAccount.id %}
+											<span>MOI<span>
+										{% else %}
+											{{ render(controller('App\\Controller\\TwitterController:showUsers', { 'id':tweet.message_create.sender_id } ))  }}
+										{% endif %}
+
+
+										{# {{ tweet.message_create.sender_id }} #}
 									</td>
 
-                                    <td></td>
-                                    <td></td>
+								
 									<td>
 										detail - edit -
 										{# <a href=" {{ path('twitterOne',{idTweet:tweet.id} ) }} ">voir</a> #}
