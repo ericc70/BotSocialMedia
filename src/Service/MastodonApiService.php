@@ -153,11 +153,7 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'GET',
-            'api/v1/statuses/' . $id,
-            [
-                // 'auth_bearer' => $this->jeton,
-            ]
-        );
+            'api/v1/statuses/' . $id  );
 
         return $response->toArray();
     }
@@ -165,12 +161,7 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'GET',
-            '/api/v1/statuses/' . $id . '/reblogged_by',
-            [
-                // 'auth_bearer' => $this->jeton,
-
-            ]
-        );
+            '/api/v1/statuses/' . $id . '/reblogged_by' );
 
         dd($response->toArray());
     }
@@ -180,12 +171,7 @@ class MastodonApiService
     {
         $response = $this->client->request(
             'GET',
-            '/api/v1/statuses/' . $id . '/favourited_by',
-            [
-                // 'auth_bearer' => $this->jeton,
-
-            ]
-        );
+            '/api/v1/statuses/' . $id . '/favourited_by'  );
 
         dd($response->toArray());
     }

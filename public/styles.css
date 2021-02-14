@@ -1,6 +1,7 @@
 body{
     color:aliceblue;
     background-color: rgb(9, 11, 15) !important;
+    font-family: lato;
 }
 input,textarea,select,option{
     background-color: #212529 !important;
@@ -60,7 +61,16 @@ input,textarea,select,option{
   min-height: calc(100vh - 145px);
 }
 
+.ascii-art {
 
+  white-space: pre;
+
+}
+
+.ascii-font {
+  font-family: monospace;
+    color: #00cc00;
+}
 
 .heartbeat{
 animation: heartbeat 1s  infinite ;
@@ -70,6 +80,10 @@ background-clip: text;
 background-image: linear-gradient(60deg, #800404, #f30000);
 color: transparent;
 
+}
+
+nav, footer{
+  font-family: monospace;
 }
 @keyframes heartbeat {
   25% { opacity: 0.80; }

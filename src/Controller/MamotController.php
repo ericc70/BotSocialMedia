@@ -21,6 +21,21 @@ class MamotController extends AbstractController
    public function __construct(MastodonApiService $mamot){
        $this->mamot = $mamot;
     }
+
+/**
+ * @Route("", name="index")
+ *
+ * @return response
+ */
+public function index()
+{
+    return $this->render('mamot/index.html.twig', [
+      
+         'myAccount' => $this->mamot->getAccount(),
+    ]);
+
+}
+
 /**
  * @Route("timeline", name="timeline")
  *
