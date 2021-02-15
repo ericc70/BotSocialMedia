@@ -8,26 +8,18 @@
 	<section class="container my-5">
 		{{ form_start(form ) }}
 		<div class="row d-flex">
-
 			<div class="col-12 col-md-10">
 				{{  form_errors(form.texte)}}
 				{# {{ form_label(form.texte, 'tete') }} #}
 				{{ form_widget(form.texte) }}
 			</div>
-
 			<div class="col-12 col-md-2">
-				{{ form_widget(form.Ajouter) }}
+			
+				{{ form_widget(form.Valider,  { 'label': 'Ajouter' }) }}
 			</div>
-
-
 		</div>
 		{{ form_end(form) }}
 	</section>
-
-	<pre>
-    {{ dump(random) }}
-</pre>
-
 	<div class="container-fluid mt-5">
 		<div class="container">
 			<div class="row">
@@ -49,115 +41,42 @@
 									<td>
 										{{ content.texte}}
 									</td>
-
 									<td>
 										<a href="#" class="Edit" data-id="{{content.id }}" data-bs-toggle="modal" data-bs-target="#exampleModal">
 											<i class="bi bi-pencil-square"></i>
 										</a>
-										{# <a href="{{ path('twitterWelcomeMessageDelete',{id:Wmes.id,token: csrf_token('delete_welcomeMessage') }) }} " onclick="return confirm('Voulez vous vraiment supprimer ?')"> #}
+										<a href="{{ path('bot_delete',{id:content.id,token: csrf_token('delete_bot_content') }) }} " onclick="return confirm('Voulez vous vraiment supprimer ?')">
 										<i class="bi bi-trash-fill text-danger"></i>
-										{# </a> #}
-
-
+										</a>
 									</td>
 
 								</tr>
 							{% endfor %}
 						</tbody>
 					</table>
-
-
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	{# modal #}
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div class="modal-content bg-gray-02">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Edition d'un contenu</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					{% if condition is defined  %}{% endif %}
-					formulaire edition
 					<div id="editform"></div>
-					<div id="reponse"></div>
+					
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
+				
 			</div>
 		</div>
 	</div>
-	<script>
-	
-let formEdit = document.querySelectorAll('.Edit');
-
-let urlpath = "http://twitterapi.home:8080/bot/edit/"
-for (let i = 0; i < formEdit.length; i++) {
-
-    formEdit[i].addEventListener("click", function (e) {
-                e.preventDefault();
-                // console.log(i)
-                // console.dir( formEdit[i] );
-                let dataId = formEdit[i].getAttribute('data-id')
-                // console.log(dataId)
-
-
-                fetch(urlpath+dataId, {
-                           method: 'POST'
-
-                    }).then(function (reponse) {
-                    return reponse.text();
-                }).then(function (datas) {
-                    // console.dir(datas)
-                    html = datas;
-                    signaform = document.querySelector('#editform');
-                    signaform.innerHTML = html;
-
-                    editionForm = document.querySelector('form[name="edit_bot_content"]');
-                    // console.log(editionForm)
-                    editionForm.addEventListener("submit", function (e) {
-                        e.preventDefault();
-                        // console.log('click')
-                        dataSend = new FormData(editionForm);
-
-                         fetch(urlpath+dataId, {
-                                method: 'POST',
-                                body: dataSend
-
-
-                            }).then(function (reponse) {
-                           return reponse.text();
-                        }).then(function (datas) {
-							html = datas.message;
-
-							if (datas.code == 001) {
-							signaform.classList.add('d-none')
-							}
-							divReponse = document.querySelector('#reponse');
-							divReponse.innerHTML = html;
-							
-							setTimeout("document.location.reload(true)", 2000);
-						
-							
-						})
-                    })
-
-
-
-
-
-
-
-                })
-            })
-        }
-
-	</script>
+		{% block javascripts %}
+		<script src="{{ asset('/js/botcontent.min.js') }}"> </script>
+		{% endblock %} 
 {% endblock %}
+	

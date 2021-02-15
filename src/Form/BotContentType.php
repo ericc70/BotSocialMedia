@@ -23,7 +23,7 @@ class BotContentType extends AbstractType
                 'maxlength' => 240
             ]
         ])
-            ->add('Ajouter', SubmitType::class)
+            ->add('Valider', SubmitType::class)
         ;
     }
 
