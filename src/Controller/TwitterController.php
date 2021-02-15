@@ -132,9 +132,10 @@ class TwitterController extends AbstractController
      */
     public function PostDirectMessage(): Response
     {
+        //$idUser  -> get account
+        // $message get request
+      
 
-        $message = "dur dur la vie de devleloopeur";
-        $idUser = "716615506669789187";
         $this->tweet->postDirectMessage("$message", "$idUser");
         return $this->render('twitter/index.html.twig', [
             'controller_name' => 'twitterController',

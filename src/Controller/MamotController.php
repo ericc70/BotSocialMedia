@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\MessageType;
 use App\Service\MastodonApiService;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,29 +42,29 @@ public function index()
  *
  * @return response
  */
-    public function getPublicTimeline()
+    public function getPublicTimeline(Request $request, $local=false)
     {
+        $local = ($request->query->get('local') == 1 ) ? true : false;
+     
+        $homeTimeline= ($request->query->get('home') == 1 ) ? true : false;
+        if ($homeTimeline == true){
+            $pouets = $this->mamot->getHomeTimeline();
+
+        }else{
+            $pouets= $this->mamot->getPublicTimeline([
+                'local' => $local
+             
+           ]);
+        }
+
         return $this->render('mamot/list.html.twig', [
             'titleController' => 'Timeline',
-            'pouets' => $this->mamot->getPublicTimeline(),
+            'pouets' => $pouets,
              'myAccount' => $this->mamot->getAccount(),
         ]);
     }
   
-  /**
- * @Route("timeline-home", name="timeline-home")
- *
- * @return response
- */
-    public function getHomeTimeline()
-    {
-        return $this->render('mamot/list.html.twig', [
-            'titleController' => 'Home Timeline',
-            'pouets' => $this->mamot->getHomeTimeline(),
-            'myAccount' => $this->mamot->getAccount(),
-        ]);
-    }
-  
+
   
     /**
      * @Route("/search", name="search")

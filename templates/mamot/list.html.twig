@@ -13,19 +13,12 @@
 					<h2>{{ titleController}}</h2>
 				</div>
 				<div class="col-9 justify-content-end ">
-					{% if titleController == "Home Timeline" %}
-						<a href="#" class="btn btn-primary">
-							Mention</a>
-						<a href="#" class="btn btn-primary">
-							DM</a>
-					{% endif %}
-					{% if titleController == "Timeline" %}
-						<a href="#" class="btn btn-primary">
-							
-							Local</a>
-						<a href="#" class="btn btn-primary">
+				
+						<a href="{{ path('mamot-timeline' , {home:true}) }} " class="btn btn-primary">Home</a>
+						<a href="{{ path('mamot-timeline' , {local:true}) }} " class="btn btn-primary">Local</a>
+						<a href="{{ path('mamot-timeline' , {local:false}) }} " class="btn btn-primary">
 							General</a>
-					{% endif %}
+				
 				</div>
 			</div>
 			<div class="col-12">
