@@ -234,6 +234,20 @@ class MastodonApiService
     }
 
 
+
+    public function getShowConversation(array $arrayPathQuery = []): array {
+
+        $response = $this->client->request(
+            'GET',
+            'api/v1/conversations'
+
+        );
+
+        return $response->toArray();
+    }
+
+
+
     public function serach(array $arrayPathQuery = [])
     {
         $response = $this->client->request(
