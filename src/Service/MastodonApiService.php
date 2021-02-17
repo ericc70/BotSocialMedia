@@ -219,7 +219,7 @@ class MastodonApiService
 
 
 
-    public function getNotifications(array $arrayPathQuery = [])
+    public function getNotifications(array $arrayPathQuery = []):array
     {
         $response = $this->client->request(
             'GET',
@@ -230,7 +230,7 @@ class MastodonApiService
             ]
         );
 
-        dd($response->toArray());
+        return $response->toArray();
     }
 
 

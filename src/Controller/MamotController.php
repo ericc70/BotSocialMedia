@@ -131,6 +131,18 @@ class MamotController extends AbstractController
             'conversations' => $this->mamot->getShowConversation(),
         ]);
     }
+    /**
+     * return les notifications
+     * @Route("notification", name="notification" )
+     */
+    public function getNotifications()
+    {
+        $this->mamot->getShowConversation();
+        return $this->render('mamot/notification.html.twig', [
+            'controller_name' => 'mamot',
+            'notifications' => $this->mamot->getNotifications(),
+        ]);
+    }
 
 
     /**

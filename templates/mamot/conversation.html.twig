@@ -4,17 +4,15 @@
 {% endblock %}
 
 {% block body %}
-	<section class="container my-4">
+	<section class="container my-4 mb-4 minheiffoo">
 		<div class="row">
 			<div class="col-12">
 				<h2>
-				list des conversations
+				Liste des conversations
 				</h2>
 			</div>
 		</div>
-	</section>
 
-	<section class="container">
 		<div class ="row">
 			<div class="col-12">
 			<table class="table table-dark table-striped">
@@ -25,19 +23,16 @@
 							<th scope="col">Auteur</th>
 
 							<th scope="col">message</th>
-							<th scope="col">
-								<i class="bi bi-heart-fill"></i>
+							<th scope="col" colspan="3">
+								action
 							</th>
-							<th scope="col">
-								<i class="bi bi-arrow-repeat"></i>
-							</th>
-							<th scope="col">	action</th>
+							
 						</tr>
 					</thead>
 					<tbody>
 						{% for conversation in conversations %}
 							<tr>
-								<td>{{conversation.last_status.created_at}}</td>
+								<td>{{conversation.last_status.created_at | date ('d-m-Y H:m:s ')}}</td>
 								<td>
 									{% for account in conversation.accounts %}
 											{{ account.username}} 
@@ -49,7 +44,7 @@
 								<td> m cue vue</td>
 								<td> 
 								{% if conversation.last_status.in_reply_to_id %}
-								Voir le fil
+								<a href="{{ path('mamot-pouet-f-id',{id:conversation.last_status.id} )}} " >voir</a>
 								{% endif %}
 								</td>
 								<td>suppri</td>
@@ -69,14 +64,4 @@
 	</section>
 
 
-<section>
-	<pre>
-		{{ dump(conversations) }}
-	</pre>
-</section>
-
-
-<script>
-
-</script>
 	{% endblock %}
