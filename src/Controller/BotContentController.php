@@ -101,7 +101,7 @@ class BotContentController extends AbstractController
      * @Route("del/{id}", name="delete",  requirements={"id" = "\d+"} )
      *
      */
-    public function delaiContent(Request $request, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager , BotContent $content): Response
+    public function delContent(Request $request, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager , BotContent $content): Response
     {
            //token
            $submittedToken = new CsrfToken('delete_bot_content', $request->query->get('token'));

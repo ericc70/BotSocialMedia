@@ -7,7 +7,9 @@ use App\Service\MastodonApiService;
 use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -110,13 +112,20 @@ class MamotController extends AbstractController
     }
 
     /**
-     * @Route("pouet/del/{id}", name="del-pouet-id")
+     * @Route("pouet/del/{id}", name="del-pouet-id" , requirements={"id" = "\d+"} )
      */
-    public function deletePouet(int $id): Response
+    public function deletePouet(int $id, Request $request, CsrfTokenManagerInterface $csrfTokenManager): Response
     {
 
+          //token
+          $submittedToken = new CsrfToken('delete_pouett', $request->query->get('token'));
+          if (!$csrfTokenManager->isTokenValid($submittedToken)) {
+  
+              return $this->redirectToRoute('denied');
+          }
+         
         $this->mamot->deletePouet($id);
-        return $this->redirectToRoute("mamot-timeline-home");
+        return $this->redirectToRoute("mamot-timeline");
     }
 
     /**
@@ -131,6 +140,7 @@ class MamotController extends AbstractController
             'conversations' => $this->mamot->getShowConversation(),
         ]);
     }
+    
     /**
      * return les notifications
      * @Route("notification", name="notification" )
