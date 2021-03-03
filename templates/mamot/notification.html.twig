@@ -55,9 +55,9 @@
 
 								
 										{% if notification.status.visibility == "direct" %}
-											<a hrtef="#">  <i class="bi bi-eye-fill"></i> conversatio </a>
+											<a href="{{ path('mamot-pouet-f-id',{id:notification.status.id} )}}">  <i class="bi bi-eye-fill"></i> (conversation) </a>
 										{% else %}
-												<a hrtef="#">  <i class="bi bi-eye-fill"></i> detail </a>
+												<a href="#">  <i class="bi bi-eye-fill"></i> (détail) </a>
 										{% endif %}
 										 </td>
 
@@ -77,7 +77,9 @@
 			</div>
 
 		</div>
-
+<pre>
+	{{ dump(notifications) }}
+</pre>
 	</section>
 
 

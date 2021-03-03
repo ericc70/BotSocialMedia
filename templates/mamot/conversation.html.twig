@@ -41,13 +41,13 @@
 
 									<td>{{conversation.last_status.content | raw}}</td>
 
-								<td> m cue vue</td>
+								{# <td> m cue vue</td> #}
 								<td> 
 								{% if conversation.last_status.in_reply_to_id %}
-								<a href="{{ path('mamot-pouet-f-id',{id:conversation.last_status.id} )}} " >voir</a>
+								<a href="{{ path('mamot-pouet-f-id',{id:conversation.last_status.id} )}} " ><i class="bi bi-eye-fill"></i></a>
 								{% endif %}
 								</td>
-								<td>suppri</td>
+								<td><a href="{{ path('mamot-del-conversation-id',{id:conversation.id, token: csrf_token('delete_conversation')} ) }}"><i class="bi bi-trash-fill text-danger"></i></td>
 
 							</tr>
 

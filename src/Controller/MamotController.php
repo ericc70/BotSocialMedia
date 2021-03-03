@@ -11,7 +11,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\Security\Csrf\CsrfTokenManager;
 
 /**
  * @Route("/mamot/", name="mamot-")
@@ -134,7 +134,7 @@ class MamotController extends AbstractController
      */
     public function getShowConversation()
     {
-        $this->mamot->getShowConversation();
+        
         return $this->render('mamot/conversation.html.twig', [
             'controller_name' => 'mamot',
             'conversations' => $this->mamot->getShowConversation(),
@@ -147,13 +147,29 @@ class MamotController extends AbstractController
      */
     public function getNotifications()
     {
-        $this->mamot->getShowConversation();
+      
         return $this->render('mamot/notification.html.twig', [
             'controller_name' => 'mamot',
             'notifications' => $this->mamot->getNotifications(),
         ]);
     }
 
+    /**
+     * @Route("conversation/del/{id}", name="del-conversation-id" , requirements={"id" = "\d+"} )
+     */
+    public function delConversation(int $id, Request $request, CsrfTokenManagerInterface $csrfTokenManager): Response
+    {
+
+             //token
+             $submittedToken = new CsrfToken('delete_conversation', $request->query->get('token'));
+             if (!$csrfTokenManager->isTokenValid($submittedToken)) {
+     
+                 return $this->redirectToRoute('denied');
+             }
+            
+           $this->mamot->delConverstation($id);
+           return $this->redirectToRoute("mamot-conversation");
+    }
 
     /**
      * Voir un staus en detail

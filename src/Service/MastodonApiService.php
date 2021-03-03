@@ -246,6 +246,16 @@ class MastodonApiService
         return $response->toArray();
     }
 
+    public function delConverstation(int $id){
+        $response = $this->client->request(
+            'DELETE',
+            'api/v1/conversations/'. $id
+
+        );
+        return $response->toArray();
+
+    }
+
 
 
     public function serach(array $arrayPathQuery = [])
